@@ -6,10 +6,17 @@ const InformationsContext = createContext([]);
 // 2. cream provider pe baza contextului
 function InformationsProvider({ children }) {
   const [informations, setInformations] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   const value = {
-    informations,
+    informations: searchValue
+      ? informations.filter(({ nume, prenume, telefon }) =>
+          [nume, prenume, telefon].some((item) => item.includes(searchValue))
+        )
+      : informations,
     setInformations,
+    searchValue,
+    setSearchValue,
   };
 
   return (
