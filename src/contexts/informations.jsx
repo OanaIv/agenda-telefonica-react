@@ -1,12 +1,18 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 // 1. cream contextul
 const InformationsContext = createContext([]);
 
 // 2. cream provider pe baza contextului
 function InformationsProvider({ children }) {
-  const [informations, setInformations] = useState([]);
+  const [informations, setInformations] = useState(() =>
+    JSON.parse(window.localStorage.getItem("AGENDA") ?? "[]")
+  );
   const [searchValue, setSearchValue] = useState("");
+
+  useEffect(() => {
+    window.localStorage.setItem("AGENDA", JSON.stringify(informations));
+  }, [informations]);
 
   const value = {
     informations: searchValue
