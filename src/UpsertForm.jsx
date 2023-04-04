@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { useInformations } from "./contexts/informations";
 
 const defaultInitialData = {
   nume: "",
@@ -9,13 +10,14 @@ const defaultInitialData = {
   telefon: "",
 };
 
-function UpSertForm({ onSubmit, initialData }) {
+function UpSertForm({ initialData }) {
+  const { setInformations } = useInformations();
   const [informatie, setInformatie] = useState(
     initialData || defaultInitialData
   );
 
   const handleOnSubmit = () => {
-    onSubmit(informatie);
+    setInformations((prevValue) => [...prevValue, informatie]);
     setInformatie(defaultInitialData);
   };
 

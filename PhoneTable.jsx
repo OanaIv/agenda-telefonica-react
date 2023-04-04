@@ -1,0 +1,3 @@
+function PhoneTable() {
+} 
+export {PhoneTable};

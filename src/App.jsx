@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { UpSertForm } from "./UpsertForm";
 import "./App.css";
 import { PhoneTable } from "./PhoneTable";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import { createTheme, ThemeProvider, Button } from "@mui/material";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ff0000",
+    },
+  },
+});
 
 function App() {
-  const [informations, setInformations] = useState([]);
-
-  const handlerAddInfo = (info) => {
-    setInformations((prevValue) => [...prevValue, info]);
-  };
-
   return (
     <Box sx={{ p: 4 }}>
       <Stack spacing={2} direction="row">
         <Box sx={{ flex: 1 }}>
-          <PhoneTable informations={informations}></PhoneTable>
+          <PhoneTable></PhoneTable>
         </Box>
 
         <Box sx={{ flex: 1 }}>
-          <UpSertForm onSubmit={handlerAddInfo} />
+          <UpSertForm />
         </Box>
       </Stack>
+
+      <ThemeProvider theme={theme}>
+        <Button variant="contained">apasa</Button>
+      </ThemeProvider>
     </Box>
   );
 }

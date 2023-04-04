@@ -6,12 +6,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useInformations } from "./contexts/informations";
 
 function createData(nume, prenume, telefon) {
   return { nume, prenume, telefon };
 }
 
-function PhoneTable({ informations = [] }) {
+function PhoneTable() {
+  const { informations } = useInformations();
+
   const rows = informations.map(({ nume, prenume, telefon }) =>
     createData(nume, prenume, telefon)
   );
